@@ -32,8 +32,7 @@ window.onload = () => {
               path: l,
               text: 'Copy',
               onClick: () => {
-                console.log('LLL', l);
-                navigator.clipboard.writeText(l.children[0].target.value);
+                navigator.clipboard.writeText(l.children[0].value);
               }
             })
           }
