@@ -71,7 +71,7 @@ El.Div({
           value: 'Login and get Code',
           onclick: () => {
             document.activeElement.blur();
-            window.open(info.url+new UrlSearchParams(params));
+            window.open(info.url+new URLSearchParams(params));
           }
         });
       }
