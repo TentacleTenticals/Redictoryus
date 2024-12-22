@@ -179,7 +179,7 @@ export const El = {
     // if(container) this.container.appendChild(main);
     (o.label ? this.l : o.path).appendChild(main);
 
-    if(o.func) o.func(main);
+    if(o.func) o.func(o.label ? this.l : main);
 
     if(o.rtn){
       if(!rtn.length > 0 && !o.container) return main;
