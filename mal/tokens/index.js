@@ -5,6 +5,16 @@ El.Div({
   cName: 'mainer',
   text: 'Verificator',
   func: (m) => {
+    function cc(length) {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
+    
+      for (var i = 0; i < length; i++) {
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+    
+      return text;
+    };
     const info = {
       url: 'https://myanimelist.net/v1/oauth2/authorize?'
     };
@@ -61,7 +71,7 @@ El.Div({
           value: 'Login and get Code',
           onclick: () => {
             document.activeElement.blur();
-            window.open(info.url+toArr(params));
+            window.open(info.url+new UrlSearchParams(params));
           }
         });
       }
