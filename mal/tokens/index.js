@@ -1,4 +1,4 @@
-import {El} from '../src/mjs.js';
+import {El} from '../../src/mjs.js';
 
 El.Div({
   path: document.body,
