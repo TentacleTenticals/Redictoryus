@@ -1,0 +1,35 @@
+.mainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+  width: max-content;
+
+  label {
+    display: flex;
+    gap: 0 5px;
+    margin: 0 0 0 auto;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+    padding: 10px;
+    border: 1px solid rgb(0 0 0);
+    border-radius: 3px;
+  
+    &.main {
+      background-color: rgb(200 220 240);
+    }
+  
+    &.tokens {
+      background-color: rgb(255 220 240);
+  
+      .btn {
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+  }
+}
