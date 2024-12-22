@@ -31,7 +31,7 @@ window.onload = () => {
             El.Button({
               path: l,
               text: 'Copy',
-              onClick: () => {
+              onclick: () => {
                 navigator.clipboard.writeText(l.children[0].value);
               }
             })
