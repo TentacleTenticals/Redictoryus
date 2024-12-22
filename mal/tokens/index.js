@@ -131,15 +131,15 @@ El.Div({
             }).then(r => r.json().then(
               res => {
                 console.log('RES', res);
-                form.children[2].classList.remove('hidden');
                 form.children[3].classList.remove('hidden');
+                form.children[4].classList.remove('hidden');
                 tokens = res;
               },
               err => {
                 console.log('ERR', err);
                 console.log('ERRRRR', r);
-                form.children[2].classList.add('hidden');
                 form.children[3].classList.add('hidden');
+                form.children[4].classList.add('hidden');
                 tokens = {};
               }
             ))
