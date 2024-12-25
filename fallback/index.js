@@ -2,18 +2,13 @@ import {El} from '../src/mjs.js';
 
 window.onload = () => {
   console.log('Loaded', document.location.href);
-  let param = document.location.search;
-  if(!param) return;
-
-  param = param.substring(1);
-
-  const arr = param.split('&');
+  const params = new URLSearchParams(document.location.search);
   const o = {};
-  arr.forEach(e => {
-    const q = e.split('=');
-    o[q[0]] = q[1];
-    // o.push({[q[0]]:q[1]});
-  })
+  
+  for(let [key, val] of params.entries()){
+    console.log(`${key}, ${val}`);
+    o[key] = val;
+  };
 
   console.log('Params', o);
 
@@ -53,5 +48,7 @@ window.addEventListener('message', (e) => {
 
   if(e.data.type === 'close') window.close();
 });
+
+if(o) window.opener.postMessage(o, '*');
 
 // console.log('Loaded');
