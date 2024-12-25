@@ -46,6 +46,12 @@ window.onload = () => {
   // params.forEach((v, k) => {
   //     console.log(k, v)
   // })
-}
+};
+
+window.addEventListener('message', (e) => {
+  console.log('Message fromm c!', e.data);
+
+  if(e.data.type === 'close') window.close();
+});
 
 // console.log('Loaded');
