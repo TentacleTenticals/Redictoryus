@@ -42,7 +42,7 @@ window.onload = () => {
     }
   });
 
-  if(o) window.opener.postMessage(o, '*');
+  if(o && window.opener) window.opener.postMessage(o, '*');
 
 
   // const params = new URLSearchParams(document.location.search);
