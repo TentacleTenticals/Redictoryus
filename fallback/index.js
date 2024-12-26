@@ -1,5 +1,11 @@
 import {El} from '../src/mjs.js';
 
+window.addEventListener('message', (e) => {
+  console.log('Message fromm p!', e.data);
+
+  if(e.data.type === 'close') window.close();
+});
+
 window.onload = () => {
   console.log('Loaded', document.location.href);
   const params = new URLSearchParams(document.location.search);
@@ -34,7 +40,9 @@ window.onload = () => {
         })
       }
     }
-  })
+  });
+
+  if(o) window.opener.postMessage(o, '*');
 
 
   // const params = new URLSearchParams(document.location.search);
@@ -42,13 +50,5 @@ window.onload = () => {
   //     console.log(k, v)
   // })
 };
-
-window.addEventListener('message', (e) => {
-  console.log('Message fromm c!', e.data);
-
-  if(e.data.type === 'close') window.close();
-});
-
-if(o) window.opener.postMessage(o, '*');
 
 // console.log('Loaded');
