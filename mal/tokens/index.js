@@ -1,5 +1,9 @@
 import {El} from '../../src/mjs.js';
 
+window.addEventListener('message', (e) => {
+  console.log('Message fromm c!', e.data);
+});
+
 El.Div({
   path: document.body,
   cName: 'mainer',
