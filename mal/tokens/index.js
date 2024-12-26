@@ -1,8 +1,8 @@
 import {El} from '../../src/mjs.js';
 
-window.addEventListener('message', (e) => {
-  console.log('Message fromm c!', e.data);
-});
+// window.addEventListener('message', (e) => {
+//   console.log('Message fromm c!', e.data);
+// });
 
 El.Div({
   path: document.body,
@@ -30,7 +30,12 @@ El.Div({
       grant_type: 'authorization_code',
       code_verifier: params.code_challenge
     };
-    let tokens;
+    let tokens, code;
+
+    window.addEventListener('message', (e) => {
+      console.log('Message fromm c!', e.data);
+      if(e.data.code) code.value = e.data.code;
+    });
 
     El.Form({
       path: m,
@@ -103,6 +108,9 @@ El.Div({
           onblur: (e) => {
             params1.code = e.target.value;
             // console.log('Q', params1);
+          },
+          func: (e) => {
+            code = e;
           }
         });
         
@@ -153,7 +161,7 @@ El.Div({
         El.Button({
           path: form,
           cName: 'btn hidden',
-          text: 'Get token',
+          text: 'Copy token',
           onclick: () => {
             document.activeElement.blur();
             navigator.clipboard.writeText(tokens.access_token);
@@ -163,7 +171,7 @@ El.Div({
         El.Button({
           path: form,
           cName: 'btn hidden',
-          text: 'Get refresh token',
+          text: 'Copy refresh token',
           onclick: () => {
             document.activeElement.blur();
             navigator.clipboard.writeText(tokens.refresh_token);
