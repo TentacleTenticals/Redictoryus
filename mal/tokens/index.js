@@ -32,11 +32,6 @@ El.Div({
     };
     let tokens, code;
 
-    window.addEventListener('message', (e) => {
-      console.log('Message fromm c!', e.data);
-      if(e.data.code) code.value = e.data.code;
-    });
-
     El.Form({
       path: m,
       cName: 'form main',
@@ -179,6 +174,11 @@ El.Div({
           }
         });
       }
+    });
+
+    window.addEventListener('message', (e) => {
+      console.log('Message from c!', e.data);
+      if(e.data.code) code.value = e.data.code;
     });
   }
 })
