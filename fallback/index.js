@@ -1,9 +1,19 @@
 import {El} from '../src/mjs.js';
+const el = {};
+
+El.Div({
+  path: document.body,
+  cName: 'msg',
+  func: (e) => {
+    el.MSG = e;
+  }
+});
 
 window.addEventListener('message', (e) => {
-  console.log('Message fromm p!', e.data);
+  console.log('Message from p!', e.data);
 
   if(e.data.type === 'close') window.close();
+  if(e.data.MSG) el.MSG.textContent = e.data.MSG;
 });
 
 window.onload = () => {
