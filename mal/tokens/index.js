@@ -6,19 +6,66 @@ import {El} from '../../src/mjs.js';
 
 El.Div({
   path: document.body,
-  cName: 'mainer',
-  text: 'Verificator',
-  func: (m) => {
-    function cc(length) {
-      var text = "";
-      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
+  cName: 'm header',
+  text: 'Получатель MAL токенов',
+});
+
+El.Div({
+  path: document.body,
+  cName: 'helper flex ver',
+  func: (h) => {
+    El.Div({
+      path: h,
+      cName: 'header',
+      text: 'Справка'
+    });
+
+    El.Div({
+      path: h,
+      cName: 'list flex ver',
+      func: (l) => {
+        El.Div({
+          path: l,
+          cName: 'item',
+          text: 'Вы можете создать MAL приложение по ссылке ',
+          func: (q) => {
+            El.A({
+              path: q,
+              text: 'MAL',
+              url: 'https://myanimelist.net/apiconfig'
+            });
+          }
+        });
     
-      for (var i = 0; i < length; i++) {
-          text += possible.charAt(Math.floor(Math.random() * possible.length));
+        El.Div({
+          path: l,
+          cName: 'item',
+          func: (q) => {
+            El.Div({
+              path: q,
+              text: '"Catcher Url" используется для получения и передачи запросов. Вы можете скопировать проект и захостить его на '
+            });
+            El.A({
+              path: q,
+              text: 'Glitch',
+              url: 'https://glitch.com'
+            });
+    
+            El.Div({
+              path: q,
+              text: ' и аналогах'
+            });
+          }
+        });
       }
-    
-      return text;
-    };
+    });
+  }
+});
+
+El.Div({
+  path: document.body,
+  cName: 'mainer',
+  func: (m) => {
     const info = {
       url: 'https://myanimelist.net/v1/oauth2/authorize?'
     };
@@ -30,7 +77,8 @@ El.Div({
       grant_type: 'authorization_code',
       code_verifier: params.code_challenge
     };
-    let tokens, code;
+    const el = {};
+    let tokens;
 
     El.Form({
       path: m,
@@ -39,6 +87,7 @@ El.Div({
         El.Input({
           path: form,
           label: 'Client ID',
+          title: 'ID клиента',
           required: true,
           onblur: (e) => {
             params.client_id = e.target.value;
@@ -60,6 +109,7 @@ El.Div({
         El.Input({
           path: form,
           label: 'Redirect url',
+          title: 'Ссылка на сайт, которую вы ввели при создании приложения на сайте MAL',
           type: 'url',
           required: true,
           onblur: (e) => {
@@ -72,10 +122,10 @@ El.Div({
         El.Input({
           path: form,
           type: 'submit',
-          value: 'Login and get Code',
+          value: 'Войти в аккаунт MAL и получить код',
           onclick: () => {
             document.activeElement.blur();
-            window.open(info.url+new URLSearchParams(params));
+            el.w = window.open(info.url+toArr(params));
           }
         });
       }
@@ -88,6 +138,7 @@ El.Div({
         El.Input({
           path: form,
           label: 'Catcher url',
+          title: 'Ссылка на сайт, который обработает запрос, выдав в ответ токены',
           type: 'url',
           required: true,
           onblur: (e) => {
@@ -99,20 +150,23 @@ El.Div({
         El.Input({
           path: form,
           label: 'Code',
+          title: 'Код, который вы получите при нажатии кнопки "Войти в аккаунт MAL и получить код". Вводить не нужно, он впишется автоматически',
           required: true,
           onblur: (e) => {
             params1.code = e.target.value;
             // console.log('Q', params1);
           },
           func: (e) => {
-            code = e;
+            el.code = e;
+            // console.log('EL', el.code)
           }
         });
         
         El.Input({
           path: form,
           type: 'submit',
-          value: 'Get tokens',
+          cName: 'btn tokens',
+          value: 'Получить токены',
           onclick: () => {
             document.activeElement.blur();
             // form.children[2].classList.remove('hidden');
@@ -156,7 +210,8 @@ El.Div({
         El.Button({
           path: form,
           cName: 'btn hidden',
-          text: 'Copy token',
+          text: 'Токен',
+          title: 'Токен, необходимый для использования апи MAL. Действует месяц',
           onclick: () => {
             document.activeElement.blur();
             navigator.clipboard.writeText(tokens.access_token);
@@ -166,7 +221,8 @@ El.Div({
         El.Button({
           path: form,
           cName: 'btn hidden',
-          text: 'Copy refresh token',
+          text: 'Токен обновления',
+          title: 'Токен, необходимый для получения нового токена апи MAL',
           onclick: () => {
             document.activeElement.blur();
             navigator.clipboard.writeText(tokens.refresh_token);
@@ -178,7 +234,16 @@ El.Div({
 
     window.addEventListener('message', (e) => {
       console.log('Message from c!', e.data);
-      if(e.data.code) code.value = e.data.code;
+      console.log('ELL', el)
+      if(e.data.code){
+        el.code.value = e.data.code;
+        params1.code = e.data.code;
+
+        el.w.postMessage({MSG:'Код получен, данная вкладка будет закрыта через 5 секунд'}, '*');
+        setTimeout(() => {
+          el.w.postMessage({type:'close'}, '*');
+        }, 5000);
+      }
     });
   }
 })
