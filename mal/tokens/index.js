@@ -1,4 +1,14 @@
 import {El} from '../../src/mjs.js';
+function cc(length){
+  let text = "";
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
+
+  for(var i = 0; i < length; i++){
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return text;
+};
 
 // window.addEventListener('message', (e) => {
 //   console.log('Message fromm c!', e.data);
