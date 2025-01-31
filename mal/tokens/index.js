@@ -16,27 +16,27 @@ function cc(length){
 
 El.Div({
   path: document.body,
-  cName: 'm header',
+  class: 'm header',
   text: 'Получатель MAL токенов',
 });
 
 El.Div({
   path: document.body,
-  cName: 'helper flex ver',
+  class: 'helper flex ver',
   func: (h) => {
     El.Div({
       path: h,
-      cName: 'header',
+      class: 'header',
       text: 'Справка'
     });
 
     El.Div({
       path: h,
-      cName: 'list flex ver',
+      class: 'list flex ver',
       func: (l) => {
         El.Div({
           path: l,
-          cName: 'item',
+          class: 'item',
           text: 'Вы можете создать MAL приложение по ссылке ',
           func: (q) => {
             El.A({
@@ -49,7 +49,7 @@ El.Div({
     
         El.Div({
           path: l,
-          cName: 'item',
+          class: 'item',
           func: (q) => {
             El.Div({
               path: q,
@@ -74,7 +74,7 @@ El.Div({
 
 El.Div({
   path: document.body,
-  cName: 'mainer',
+  class: 'mainer',
   func: (m) => {
     const info = {
       url: 'https://myanimelist.net/v1/oauth2/authorize?'
@@ -92,7 +92,7 @@ El.Div({
 
     El.Form({
       path: m,
-      cName: 'form main',
+      class: 'form main',
       func: (form) => {
         El.Input({
           path: form,
@@ -143,7 +143,7 @@ El.Div({
 
     El.Form({
       path: m,
-      cName: 'form tokens',
+      class: 'form tokens',
       func: (form) => {
         El.Input({
           path: form,
@@ -175,7 +175,7 @@ El.Div({
         El.Input({
           path: form,
           type: 'submit',
-          cName: 'btn tokens',
+          class: 'btn tokens',
           value: 'Получить токены',
           onclick: () => {
             document.activeElement.blur();
@@ -219,7 +219,7 @@ El.Div({
 
         El.Button({
           path: form,
-          cName: 'btn hidden',
+          class: 'btn hidden',
           text: 'Токен',
           title: 'Токен, необходимый для использования апи MAL. Действует месяц',
           onclick: () => {
@@ -230,7 +230,7 @@ El.Div({
         });
         El.Button({
           path: form,
-          cName: 'btn hidden',
+          class: 'btn hidden',
           text: 'Токен обновления',
           title: 'Токен, необходимый для получения нового токена апи MAL',
           onclick: () => {
