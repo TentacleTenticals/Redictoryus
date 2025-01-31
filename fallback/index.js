@@ -3,7 +3,7 @@ const el = {};
 
 El.Div({
   path: document.body,
-  cName: 'msg',
+  class: 'msg',
   func: (e) => {
     el.MSG = e;
   }
@@ -31,7 +31,7 @@ window.onload = () => {
   El.Div({
     path: document.body,
     text: 'Test',
-    cName: 'list',
+    class: 'list',
     func: (m) => {
       for(let i in o){
         El.Input({
