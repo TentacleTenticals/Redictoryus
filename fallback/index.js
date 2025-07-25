@@ -18,10 +18,15 @@ window.addEventListener('message', (e) => {
 
 window.onload = () => {
   console.log('Loaded', document.location.href);
+  const hash = document.location.hash && new URLSearchParams(document.location.hash.replace('#', ''));
   const params = new URLSearchParams(document.location.search);
   const o = {};
   
   for(let [key, val] of params.entries()){
+    console.log(`${key}, ${val}`);
+    o[key] = val;
+  };
+  for(let [key, val] of hash.entries()){
     console.log(`${key}, ${val}`);
     o[key] = val;
   };
