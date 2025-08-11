@@ -26,7 +26,7 @@ window.onload = () => {
     console.log(`${key}, ${val}`);
     o[key] = val;
   };
-  for(let [key, val] of hash.entries()){
+  if(hash) for(let [key, val] of hash.entries()){
     console.log(`${key}, ${val}`);
     o[key] = val;
   };
